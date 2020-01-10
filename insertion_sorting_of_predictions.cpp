@@ -18,11 +18,12 @@ const char kPathSeparator =
 
 void printAndWrite(char const* buffer){
 	printf("%s",buffer);
+	fflush(stdout);
 	outfile<<buffer;
 }
 
 void printCurrentOrder(string *sorted_samples, int sample_counts) {
-	char buffer[100];
+	char buffer[500];
 	sprintf(buffer, "Current Order (i = %d, j = %d):\n", insertion_sort_i, insertion_sort_j);
 	printAndWrite(buffer);
 	string sorted_samples_string = "";
@@ -36,7 +37,7 @@ void printCurrentOrder(string *sorted_samples, int sample_counts) {
 
 bool needToSwap(string *sorted_samples, int sample_counts) {
 	while (1) {
-		char buffer[100];
+		char buffer[500];
 		sprintf(buffer, "Is %s better than %s? Enter y or n (or q to quit): ", sorted_samples[insertion_sort_j - 1].c_str(), sorted_samples[insertion_sort_j].c_str());
 		printAndWrite(buffer);
 		string answer;
@@ -107,6 +108,7 @@ int main(int argc, char **argv) {
 	string sorted_samples[500]; //assumes max of 500
 	if (myfile.is_open()) {
 		while (getline(myfile, line)) {
+			line.erase(remove(line.begin(), line.end(), '\r'), line.end());//Necessary for windows
 			if(line.find("Next Iteration") != string::npos){
 				insertion_sort_i = getIntBetweenCharacters(line, "i =",",");
 				insertion_sort_j = getIntBetweenCharacters(line, "j =",")");
