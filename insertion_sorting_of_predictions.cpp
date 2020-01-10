@@ -23,7 +23,7 @@ void printAndWrite(char const* buffer){
 
 void printCurrentOrder(string *sorted_samples, int sample_counts) {
 	char buffer[100];
-	sprintf(buffer, "Sorted Order (i = %d, j = %d):\n", insertion_sort_i, insertion_sort_j);
+	sprintf(buffer, "Current Order (i = %d, j = %d):\n", insertion_sort_i, insertion_sort_j);
 	printAndWrite(buffer);
 	string sorted_samples_string = "";
 	for (int i = 0; i < sample_counts; i++) {
